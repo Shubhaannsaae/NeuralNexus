@@ -1,0 +1,376 @@
+# ================================
+# NeuralNexus - Comprehensive .gitignore
+# ================================
+
+# ================================
+# Node.js & Frontend
+# ================================
+node_modules/
+.next/
+out/
+dist/
+build/
+.nuxt/
+.vuepress/dist/
+.serverless/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# Dependency lock files (keep package.json)
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Runtime data
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage directory used by tools like istanbul
+coverage/
+*.lcov
+.nyc_output/
+
+# ================================
+# Python & Backend
+# ================================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual environments
+venv/
+ENV/
+env/
+.venv/
+.ENV/
+.env/
+pip-log.txt
+pip-delete-this-directory.txt
+
+# PyTorch model files
+*.pth
+*.pt
+*.ckpt
+*.safetensors
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+*.ipynb
+
+# IPython
+profile_default/
+ipython_config.py
+
+# Scientific Python
+.spyderproject
+.spyproject
+.ropeproject
+
+# ================================
+# Environment & Configuration
+# ================================
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env.*.local
+config.local.json
+secrets.json
+
+# API Keys and Credentials
+**/secrets/
+**/*secret*
+**/*key*
+**/*token*
+**/*credential*
+.aws/
+.gcp/
+
+# ================================
+# Databases & Data
+# ================================
+*.db
+*.sqlite
+*.sqlite3
+*.db-journal
+*.db-wal
+*.db-shm
+
+# PostgreSQL
+*.dump
+*.sql
+
+# Neo4j
+neo4j/
+graph.db/
+
+# Data files
+data/raw/
+data/processed/
+data/external/
+*.csv
+*.tsv
+*.json
+*.xml
+*.h5
+*.hdf5
+*.parquet
+
+# Model weights and checkpoints
+models/weights/
+models/checkpoints/
+*.model
+*.pkl
+*.pickle
+
+# ================================
+# Docker & Containers
+# ================================
+docker-compose.override.yml
+docker-compose.local.yml
+.dockerignore
+Dockerfile.local
+
+# ================================
+# IDEs & Editors
+# ================================
+# VSCode
+.vscode/
+*.code-workspace
+
+# IntelliJ IDEA
+.idea/
+*.iws
+*.iml
+*.ipr
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Vim
+*.swp
+*.swo
+*~
+
+# Emacs
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+*.elc
+auto-save-list
+tramp
+.\#*
+
+# ================================
+# Operating Systems
+# ================================
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+*.stackdump
+[Dd]esktop.ini
+$RECYCLE.BIN/
+*.cab
+*.msi
+*.msix
+*.msm
+*.msp
+*.lnk
+
+# Linux
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+.nfs*
+
+# ================================
+# Scientific Computing
+# ================================
+# Protein structure files
+*.pdb
+*.cif
+*.mmcif
+*.sdf
+*.mol2
+*.xyz
+
+# Molecular dynamics
+*.xtc
+*.trr
+*.dcd
+*.nc
+
+# Bioinformatics
+*.fasta
+*.fa
+*.fastq
+*.fq
+*.sam
+*.bam
+*.vcf
+*.gff
+*.gtf
+
+# Chemical informatics
+*.smi
+*.smiles
+*.inchi
+
+# ================================
+# Machine Learning
+# ================================
+# TensorFlow
+*.tfevents.*
+checkpoint
+*.ckpt.*
+*.pb
+
+# PyTorch Lightning
+lightning_logs/
+mlruns/
+wandb/
+
+# Weights & Biases
+wandb/
+
+# MLflow
+mlruns/
+mlartifacts/
+
+# Experiment tracking
+experiments/
+runs/
+outputs/
+
+# ================================
+# Documentation & Build
+# ================================
+# Sphinx documentation
+docs/_build/
+docs/build/
+.readthedocs.yml
+
+# MkDocs
+site/
+
+# ================================
+# Testing & CI/CD
+# ================================
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+
+# ================================
+# Temporary & Cache
+# ================================
+*.tmp
+*.temp
+.cache/
+.parcel-cache/
+.eslintcache
+.stylelintcache
+
+# ================================
+# Monitoring & Logs
+# ================================
+logs/
+*.log.*
+*.out
+*.err
+
+# ================================
+# Security & Secrets
+# ================================
+# Private keys
+*.pem
+*.key
+*.p12
+*.pfx
+
+# Certificates
+*.crt
+*.cer
+*.der
+
+# ================================
+# Custom Project Files
+# ================================
+# Large model files (use Git LFS instead)
+*.bin
+*.safetensors
+models/large/
+
+# Experimental notebooks
+notebooks/experiments/
+notebooks/scratch/
+
+# Local development
+local/
+tmp/
+temp/
+
+# User-specific files
+.user
+*.user
+.personal
+
+# Backup files
+*.bak
+*.backup
+*.old
+
+# ================================
+# End of .gitignore
+# ================================
