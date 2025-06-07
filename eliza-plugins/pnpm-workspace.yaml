@@ -1,0 +1,5 @@
+packages:
+  - 'bio-agent'
+  - 'protein-agent'
+  - 'literature-agent'
+  - 'hypothesis-agent'
