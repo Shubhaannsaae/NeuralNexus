@@ -1,0 +1,264 @@
+# OriginTrail DKG Configuration for NeuroGraph AI - Production Grade
+
+# Network Configuration
+network:
+  name: "OriginTrail Parachain"
+  chain_id: "otp:20430"
+  rpc_endpoint: "https://parachain-rpc.origin-trail.network"
+  explorer_url: "https://parachain.subscan.io"
+  
+# Node Configuration
+node:
+  endpoint: "https://dkg-testnet.origintrail.io"
+  port: 8900
+  api_version: "v6"
+  max_retries: 3
+  retry_delay: 1000  # milliseconds
+  
+# Authentication
+auth:
+  api_key: "${ORIGINTRAIL_API_KEY}"
+  wallet_address: "${WALLET_ADDRESS}"
+  private_key: "${PRIVATE_KEY}"
+  
+# Knowledge Assets Configuration
+knowledge_assets:
+  default_epochs: 2
+  default_token_amount: 0.01
+  max_file_size: "10MB"
+  max_assertion_size: "5MB"
+  
+  # Assertion schemas
+  schemas:
+    protein: "./schemas/protein.json"
+    drug: "./schemas/drug.json"
+    disease: "./schemas/disease.json"
+    
+  # Asset metadata
+  metadata:
+    creator: "NeuroGraph AI"
+    version: "1.0"
+    license: "CC BY 4.0"
+    
+# Data Sources Configuration
+data_sources:
+  uniprot:
+    base_url: "https://rest.uniprot.org"
+    rate_limit: 10  # requests per second
+    timeout: 30     # seconds
+    retry_attempts: 3
+    
+  chembl:
+    base_url: "https://www.ebi.ac.uk/chembl/api/data"
+    rate_limit: 5
+    timeout: 30
+    retry_attempts: 3
+    
+  pubmed:
+    base_url: "https://eutils.ncbi.nlm.nih.gov/entrez/eutils"
+    rate_limit: 3
+    timeout: 30
+    api_key: "${PUBMED_API_KEY}"
+    
+  pdb:
+    base_url: "https://data.rcsb.org/rest/v1"
+    rate_limit: 10
+    timeout: 30
+    
+  go:
+    base_url: "http://api.geneontology.org/api"
+    rate_limit: 5
+    timeout: 30
+    
+  mondo:
+    base_url: "https://www.ebi.ac.uk/ols/api/ontologies/mondo"
+    rate_limit: 5
+    timeout: 30
+
+# Ontology Mappings
+ontologies:
+  go:
+    namespace: "http://purl.obolibrary.org/obo/GO_"
+    description: "Gene Ontology"
+    categories:
+      - "molecular_function"
+      - "biological_process"
+      - "cellular_component"
+    
+  chebi:
+    namespace: "http://purl.obolibrary.org/obo/CHEBI_"
+    description: "Chemical Entities of Biological Interest"
+    
+  mondo:
+    namespace: "http://purl.obolibrary.org/obo/MONDO_"
+    description: "Monarch Disease Ontology"
+    
+  uniprot:
+    namespace: "https://www.uniprot.org/uniprot/"
+    description: "Universal Protein Resource"
+    
+  chembl:
+    namespace: "https://www.ebi.ac.uk/chembl/"
+    description: "ChEMBL Database"
+    
+  pdb:
+    namespace: "https://www.rcsb.org/structure/"
+    description: "Protein Data Bank"
+
+# Quality Control Configuration
+quality_control:
+  min_confidence_score: 0.7
+  max_assertion_size: "5MB"
+  validation_timeout: 30  # seconds
+  
+  # Data validation rules
+  validation_rules:
+    protein_sequence:
+      min_length: 10
+      max_length: 5000
+      allowed_characters: "ACDEFGHIKLMNPQRSTVWY"
+      check_molecular_weight: true
+      validate_uniprot_id: true
+      
+    drug_smiles:
+      min_length: 5
+      max_length: 500
+      validation_method: "rdkit"
+      check_molecular_properties: true
+      validate_chembl_id: true
+      
+    disease_classification:
+      validate_mondo_id: true
+      validate_icd10_code: true
+      check_hpo_terms: true
+      
+    confidence_scores:
+      min_value: 0.0
+      max_value: 1.0
+      default_value: 0.8
+
+# Graph Building Configuration
+graph_building:
+  similarity_threshold: 0.7
+  max_edges_per_node: 100
+  enable_inference: true
+  batch_size: 1000
+  
+  # Inference algorithms
+  inference:
+    protein_interactions:
+      method: "go_term_similarity"
+      threshold: 0.7
+      max_interactions: 50
+      
+    drug_targets:
+      method: "therapeutic_class_matching"
+      threshold: 0.6
+      include_predicted: true
+      
+    disease_associations:
+      method: "pathway_overlap"
+      threshold: 0.5
+      include_genetic: true
+
+# Algorithm Configuration
+algorithms:
+  community_detection: "louvain"
+  centrality_measures: 
+    - "degree"
+    - "betweenness" 
+    - "closeness"
+    - "eigenvector"
+  path_finding: "dijkstra"
+  similarity_calculation: "jaccard"
+
+# Caching Configuration
+cache:
+  enabled: true
+  ttl: 3600  # seconds (1 hour)
+  max_size: "1GB"
+  redis_url: "${REDIS_URL}"
+  key_prefix: "neurograph:kg:"
+  
+# Logging Configuration
+logging:
+  level: "INFO"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  file: "./logs/knowledge_graph.log"
+  max_file_size: "100MB"
+  backup_count: 5
+  
+  # Component-specific logging
+  loggers:
+    data_ingestion: "INFO"
+    graph_builder: "INFO"
+    validation: "INFO"
+    origintrail: "DEBUG"
+
+# Performance Configuration
+performance:
+  batch_size: 100
+  max_concurrent_requests: 10
+  timeout: 60
+  retry_attempts: 3
+  retry_delay: 1  # seconds
+  
+  # Database connection pool
+  database:
+    pool_size: 20
+    max_overflow: 30
+    pool_timeout: 30
+    
+  # Memory management
+  memory:
+    max_graph_size: "2GB"
+    gc_threshold: 0.8
+    
+# Monitoring Configuration
+monitoring:
+  enabled: true
+  metrics_endpoint: "/metrics"
+  health_check_interval: 60  # seconds
+  
+  # Alerts
+  alerts:
+    low_confidence_threshold: 0.5
+    high_error_rate_threshold: 0.1
+    stale_data_threshold: 30  # days
+    
+# Security Configuration
+security:
+  encrypt_sensitive_data: true
+  validate_external_requests: true
+  rate_limiting:
+    enabled: true
+    requests_per_minute: 100
+    burst_size: 20
+    
+  # API security
+  api:
+    require_authentication: true
+    allowed_origins:
+      - "https://neurograph.ai"
+      - "https://app.neurograph.ai"
+    max_request_size: "10MB"
+
+# Export Configuration
+export:
+  formats:
+    - "json"
+    - "rdf"
+    - "gexf"
+    - "graphml"
+  
+  compression: true
+  include_metadata: true
+  max_export_size: "100MB"
+
+# Backup Configuration
+backup:
+  enabled: true
+  schedule: "0 2 * * *"  # Daily at 2 AM
+  retention_days: 30
+  storage_location: "${BACKUP_STORAGE_PATH}"
+  compress: true
